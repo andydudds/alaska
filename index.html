@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alaska 2026 - Duddleston</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#08090e;--card:rgba(255,255,255,.04);--card-hover:rgba(255,255,255,.07);--border:rgba(255,255,255,.08);--text:#e8e6e1;--dim:#8b90b0;--hot:#ff2d55;--cyan:#00f0d4;--gold:#ffd000;--blue:#4d9eff;--purple:#b44dff;--orange:#ff8a3d;--green:#34d399}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+.glow{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.glow-1{width:400px;height:400px;background:rgba(255,45,85,.06);top:-100px;right:-100px}
+.glow-2{width:500px;height:500px;background:rgba(0,240,212,.04);bottom:-150px;left:-150px}
+.glow-3{width:300px;height:300px;background:rgba(180,77,255,.04);top:50%;left:50%;transform:translate(-50%,-50%)}
+.mountain-bg{position:fixed;bottom:0;left:0;right:0;height:45vh;pointer-events:none;z-index:0}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 24px;max-width:620px;margin:0 auto;position:relative;z-index:1}
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:15px;letter-spacing:5px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;text-shadow:0 0 20px rgba(0,240,212,.3)}
+.hero-title{font-size:clamp(60px,13vw,96px);font-weight:900;line-height:.9;margin-bottom:16px;background:linear-gradient(135deg,var(--text) 0%,var(--cyan) 40%,var(--gold) 70%,var(--hot) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:17px;color:var(--dim);margin-bottom:6px;font-weight:500}
+.hero-date{font-family:'Space Mono',monospace;font-size:12px;color:var(--hot);font-weight:700;letter-spacing:2px;margin-bottom:44px;text-shadow:0 0 16px rgba(255,45,85,.3)}
+.hero-cast{margin-bottom:52px}
+.family-tree{display:flex;flex-direction:column;align-items:center}
+.tree-mom{text-align:center;padding:14px 28px;background:var(--card);border:1px solid var(--border);border-radius:6px;backdrop-filter:blur(10px);position:relative}
+.tree-mom::before{content:'';position:absolute;inset:-1px;border-radius:6px;background:linear-gradient(135deg,var(--gold),transparent 50%);z-index:-1;opacity:.3}
+.tree-mom strong{font-size:18px;display:block;margin-bottom:2px;color:var(--gold)}
+.tree-mom span{font-size:12px;color:var(--dim)}
+.tree-line{width:1px;height:28px;background:linear-gradient(to bottom,var(--border),var(--dim));position:relative}
+.tree-line::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:140px;height:1px;background:linear-gradient(to right,transparent,var(--dim),transparent)}
+.tree-sons{display:flex;gap:20px}
+.tree-sons::before,.tree-sons::after{content:'';position:absolute;top:-1px;width:1px;height:20px;background:var(--dim)}
+.tree-sons{position:relative}
+.tree-sons::before{left:calc(50% - 70px)}
+.tree-sons::after{right:calc(50% - 70px)}
+.tree-son{text-align:center;padding:12px 22px;background:var(--card);border:1px solid var(--border);border-radius:6px;margin-top:18px;min-width:120px;backdrop-filter:blur(10px);position:relative}
+.tree-son:first-child::before{content:'';position:absolute;inset:-1px;border-radius:6px;background:linear-gradient(135deg,var(--cyan),transparent 50%);z-index:-1;opacity:.3}
+.tree-son:last-child::before{content:'';position:absolute;inset:-1px;border-radius:6px;background:linear-gradient(135deg,var(--purple),transparent 50%);z-index:-1;opacity:.3}
+.tree-son:first-child strong{color:var(--cyan)}
+.tree-son:last-child strong{color:var(--purple)}
+.tree-son strong{font-size:16px;display:block;margin-bottom:2px}
+.tree-son span{font-size:11px;color:var(--dim)}
+.nav-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.nav-card{display:flex;align-items:center;gap:14px;padding:18px 16px;background:var(--card);border:1px solid var(--border);cursor:pointer;text-decoration:none;color:var(--text);transition:all .2s;border-radius:8px;position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+.nav-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .2s}
+.nav-card:nth-child(1)::before{background:var(--hot)}
+.nav-card:nth-child(2)::before{background:var(--cyan)}
+.nav-card:nth-child(3)::before{background:var(--gold)}
+.nav-card:nth-child(4)::before{background:var(--purple)}
+.nav-card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.4);background:var(--card-hover)}
+.nav-card:hover::before{opacity:1}
+.nav-icon{font-size:26px;flex-shrink:0;width:40px;text-align:center}
+.nav-label{font-size:14px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.nav-desc{font-size:11px;color:var(--dim);margin-top:2px}
+section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z-index:1}
+.sec-back{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);text-decoration:none;margin-bottom:24px;transition:color .15s}
+.sec-back:hover{color:var(--cyan)}
+.sec-title{font-size:clamp(32px,7vw,48px);font-weight:900;line-height:1.1;margin-bottom:8px}
+.sec-title-flights{background:linear-gradient(135deg,var(--hot),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-title-activities{background:linear-gradient(135deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-title-food{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-title-intel{background:linear-gradient(135deg,var(--purple),var(--hot));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-intro{font-size:16px;color:var(--gold);margin-bottom:40px;text-shadow:0 0 12px rgba(255,208,0,.15)}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:24px 0}
+.flight-group{margin-bottom:36px}
+.flight-heading{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:14px;padding-bottom:8px}
+.flight-heading-in{color:var(--cyan);border-bottom:2px solid var(--cyan)}
+.flight-heading-out{color:var(--hot);border-bottom:2px solid var(--hot)}
+.flight{background:var(--card);border:1px solid var(--border);padding:16px;margin-bottom:6px;border-radius:8px;transition:all .15s;backdrop-filter:blur(10px)}
+.flight:hover{border-color:rgba(255,255,255,.12);background:var(--card-hover)}
+.flight-who{font-weight:700;font-size:16px}
+.flight-aka{font-size:12px;color:var(--dim);margin-bottom:10px;font-style:italic}
+.flight-detail{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px}
+.flight-detail span{color:var(--dim);font-size:10px;font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:1px}
+.flight-detail strong{color:var(--text)}
+.flight-note{font-size:14px;color:var(--text);margin-top:14px;padding:14px;background:var(--card);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;line-height:1.7}
+.activity{margin-bottom:28px}
+.activity-num{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:4px}
+.activity-num-fixed{color:var(--gold)}
+.activity-num-menu{color:var(--cyan)}
+.activity-name{font-size:24px;font-weight:800;margin-bottom:4px}
+.activity-meta{font-size:13px;color:var(--dim);margin-bottom:10px;font-family:'Space Mono',monospace}
+.activity-body{font-size:14px;line-height:1.7;color:rgba(232,230,225,.85)}
+.activity-alert{font-size:13px;margin-top:10px;padding:10px 14px;border-radius:6px;line-height:1.6;border-left:3px solid var(--gold);background:rgba(255,208,0,.05);color:var(--gold)}
+.restaurant{background:var(--card);border:1px solid var(--border);padding:18px;margin-bottom:10px;border-radius:8px;transition:all .15s;backdrop-filter:blur(10px)}
+.restaurant:hover{border-color:rgba(255,255,255,.12);background:var(--card-hover)}
+.restaurant-name{font-size:20px;font-weight:800;margin-bottom:2px}
+.restaurant-vibe{font-size:12px;color:var(--orange);font-weight:600;margin-bottom:8px}
+.restaurant-body{font-size:14px;color:rgba(232,230,225,.8);line-height:1.7}
+.restaurant-flag{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;margin-top:10px;border-radius:4px}
+.flag-fixed{background:rgba(0,240,212,.1);color:var(--cyan);border:1px solid rgba(0,240,212,.2)}
+.flag-warning{background:rgba(255,45,85,.1);color:var(--hot);border:1px solid rgba(255,45,85,.2)}
+.flag-flex{background:rgba(255,255,255,.04);color:var(--dim);border:1px solid var(--border)}
+.nugget{padding:16px 0;border-bottom:1px solid var(--border)}
+.nugget:last-child{border-bottom:none}
+.nugget-label{font-weight:700;font-size:14px;margin-bottom:4px}
+.nugget-body{font-size:14px;color:rgba(232,230,225,.8);line-height:1.7}
+.footer{text-align:center;padding:80px 24px 60px;position:relative;z-index:1}
+.footer-quote{font-size:20px;font-weight:800;font-style:italic;background:linear-gradient(135deg,var(--hot),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.footer p{font-size:12px;color:var(--dim)}
+.footer-version{margin-top:24px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,.15);letter-spacing:2px}
+@media(max-width:480px){.nav-grid{grid-template-columns:1fr}.flight-detail{flex-direction:column;gap:4px}.tree-sons{gap:12px}.tree-son{min-width:100px;padding:10px 16px}}
+</style>
+</head>
+<body>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+<div class="glow glow-3"></div>
+<svg class="mountain-bg" viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0,400 L0,280 L80,240 L160,260 L240,200 L320,220 L400,160 L440,180 L520,120 L600,150 L680,100 L720,130 L800,80 L880,120 L960,90 L1040,140 L1120,100 L1200,160 L1280,130 L1360,180 L1440,150 L1440,400Z" fill="rgba(0,240,212,.015)"/>
+<path d="M0,400 L0,320 L100,290 L200,310 L300,260 L380,280 L460,230 L540,250 L620,200 L700,230 L780,180 L860,210 L940,170 L1020,200 L1100,160 L1180,190 L1260,170 L1340,210 L1440,190 L1440,400Z" fill="rgba(180,77,255,.012)"/>
+<path d="M0,400 L0,350 L120,330 L240,345 L360,310 L480,330 L600,290 L720,310 L840,280 L960,300 L1080,270 L1200,295 L1320,275 L1440,300 L1440,400Z" fill="rgba(255,45,85,.01)"/>
+<path d="M0,400 L0,370 L40,368 L50,355 L60,368 L80,370 L110,352 L120,367 L150,370 L190,350 L200,368 L230,370 L270,348 L280,367 L320,370 L360,353 L370,368 L400,370 L450,345 L460,367 L500,370 L550,350 L560,368 L600,370 L650,348 L660,367 L700,370 L750,352 L760,368 L800,370 L850,345 L860,367 L900,370 L950,353 L960,368 L1000,370 L1050,348 L1060,367 L1100,370 L1150,350 L1160,368 L1200,370 L1250,352 L1260,367 L1300,370 L1350,345 L1360,368 L1440,370 L1440,400Z" fill="rgba(0,240,212,.008)"/>
+</svg>
+
+<div class="hero" id="top">
+<div class="hero-eyebrow">June 13 - 19, 2026</div>
+<h1 class="hero-title">Alaska.</h1>
+<p class="hero-sub"><a href="https://www.alyeskaresort.com" target="_blank" style="color:var(--dim);text-decoration:underline;text-underline-offset:3px;transition:color .15s" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--dim)'">Alyeska Resort</a>, <a href="https://www.google.com/maps/place/Alyeska+Resort/@60.9604,-149.1079,14z" target="_blank" style="color:var(--dim);text-decoration:underline;text-underline-offset:3px;transition:color .15s" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--dim)'">Girdwood</a> &amp; beyond.</p>
+<p class="hero-date">7 DAYS &middot; 3 DUDDLESTONS &middot; 0 BEARS</p>
+<div class="hero-cast">
+<div class="family-tree">
+<div class="tree-mom"><strong>Jan</strong><span>The Matriarch</span></div>
+<div class="tree-line"></div>
+<div class="tree-sons">
+<div class="tree-son"><strong>Andy</strong></div>
+<div class="tree-son"><strong>Benji</strong></div>
+</div>
+</div>
+</div>
+<div class="nav-grid">
+<a href="#flights" class="nav-card"><div class="nav-icon">&#9992;&#65039;</div><div><div class="nav-label">Flights</div><div class="nav-desc">Who lands when</div></div></a>
+<a href="#activities" class="nav-card"><div class="nav-icon">&#127956;</div><div><div class="nav-label">Activities</div><div class="nav-desc">The menu</div></div></a>
+<a href="#food" class="nav-card"><div class="nav-icon">&#127860;</div><div><div class="nav-label">Food</div><div class="nav-desc">Where we eat</div></div></a>
+<a href="#intel" class="nav-card"><div class="nav-icon">&#129504;</div><div><div class="nav-label">Intel</div><div class="nav-desc">Need to know</div></div></a>
+</div>
+</div>
+
+<section id="flights">
+<a href="#top" class="sec-back">&larr; Back to top</a>
+<h2 class="sec-title sec-title-flights">Flights</h2>
+<p class="sec-intro">Everyone arrives Jun 13. Everyone leaves Jun 19. The middle is where it gets interesting.</p>
+<div class="flight-group">
+<div class="flight-heading flight-heading-in">Inbound &mdash; Saturday, June 13</div>
+<div class="flight"><div class="flight-who">Jan</div><div class="flight-detail"><div><span>Flight</span> <strong>AS 1540</strong></div><div><span>Route</span> <strong>MSP &rarr; ANC</strong></div><div><span>Departs</span> <strong>7:40 AM</strong></div><div><span>Arrives</span> <strong>10:40 AM</strong></div><div><span>Conf</span> <strong>DQUPUV</strong></div></div></div>
+<div class="flight"><div class="flight-who">Andy</div><div class="flight-detail"><div><span>Flight</span> <strong>AS 622</strong></div><div><span>Route</span> <strong>JFK &rarr; ANC</strong></div><div><span>Departs</span> <strong>9:40 AM</strong></div><div><span>Arrives</span> <strong>1:33 PM</strong></div><div><span>Conf</span> <strong>ORAJQI</strong></div></div></div>
+<div class="flight"><div class="flight-who">Benji</div><div class="flight-detail"><div><span>Flight</span> <strong>United</strong></div><div><span>Route</span> <strong>SFO &rarr; ANC</strong></div><div><span>Departs</span> <strong>6:47 PM</strong></div><div><span>Arrives</span> <strong>10:46 PM</strong></div></div></div>
+<div class="flight-note">Mom lands first. Andy mid-afternoon. Benji rolls in at 10:46 PM because that's how Benji operates. He will find his room. He is a grown man. Allegedly.</div>
+</div>
+<div class="flight-group">
+<div class="flight-heading flight-heading-out">Outbound &mdash; Friday, June 19</div>
+<div class="flight"><div class="flight-who">Benji</div><div class="flight-detail"><div><span>Flight</span> <strong>United</strong></div><div><span>Route</span> <strong>ANC &rarr; SFO</strong></div><div><span>Departs</span> <strong>2:05 PM</strong></div><div><span>Arrives</span> <strong>7:48 PM</strong></div></div></div>
+<div class="flight"><div class="flight-who">Andy</div><div class="flight-detail"><div><span>Flight</span> <strong>AS 622</strong></div><div><span>Route</span> <strong>ANC &rarr; JFK</strong></div><div><span>Departs</span> <strong>8:20 PM</strong></div><div><span>Arrives</span> <strong>Jun 20, 7:35 AM</strong></div></div></div>
+<div class="flight"><div class="flight-who">Jan</div><div class="flight-detail"><div><span>Flight</span> <strong>AS 1540</strong></div><div><span>Route</span> <strong>ANC &rarr; MSP</strong></div><div><span>Departs</span> <strong>9:52 PM</strong></div><div><span>Arrives</span> <strong>Jun 20, 6:20 AM</strong></div></div></div>
+<div class="flight-note">Benji must be at ANC by noon for his 2:05 PM. Andy and Jan have the evening together before their flights.</div>
+</div>
+</section>
+
+<section id="activities">
+<a href="#top" class="sec-back">&larr; Back to top</a>
+<h2 class="sec-title sec-title-activities">Activities</h2>
+<p class="sec-intro">Five things to do across five open days (Jun 14-18). Order is flexible &mdash; schedule around weather, availability, and energy. Day 1 (arrival) and Day 7 (departure) are set.</p>
+<div class="activity"><div class="activity-num activity-num-fixed">Day 1 &mdash; Fixed</div><div class="activity-name">Arrival Day</div><div class="activity-meta">Saturday, June 13</div><div class="activity-body">Jan arrives 10:40 AM. Andy arrives 1:33 PM. Drive the Seward Highway to Girdwood (40 min, one of the most scenic drives in North America). Check in at Alyeska. Breathe. Dinner at <a href="https://www.alyeskaresort.com/dining/two-trees-bistro" target="_blank" style="color:var(--cyan);text-decoration:underline;text-underline-offset:3px">Two Trees Bistro</a> &mdash; just Andy and Mams.</div></div>
+<div class="divider"></div>
+<div class="activity"><div class="activity-num activity-num-menu">The Menu &mdash; 01</div><div class="activity-name"><a href="https://www.alyeskaresort.com/experience/glacier-dog-sled" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">Glacier Dog Sledding</a></div><div class="activity-meta">$615/person &middot; ~2.5 hrs &middot; Hotel pickup available</div><div class="activity-body">Helicopter into the Chugach Mountains. Land on a glacier. Mush with actual Iditarod huskies. Nowhere else on Earth.</div><div class="activity-alert">Book first. Fills fastest. Weather-dependent &mdash; schedule early in the trip for backup days.</div></div>
+<div class="divider"></div>
+<div class="activity"><div class="activity-num activity-num-menu">The Menu &mdash; 02</div><div class="activity-name"><a href="https://www.alyeskaresort.com/experience/denali-flightseeing" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">Discover Denali by Plane</a></div><div class="activity-meta">Flightseeing &middot; Departs Anchorage or Talkeetna &middot; Confirm with Lori</div><div class="activity-body">Fly over Denali (20,310 ft) &mdash; tallest peak in North America. Through the Alaska Range, over glaciers, past granite walls. Mom says it's like seeing Everest.</div><div class="activity-alert">Weather-dependent. Schedule early for backup options. Confirm operator and logistics with Lori.</div></div>
+<div class="divider"></div>
+<div class="activity"><div class="activity-num activity-num-menu">The Menu &mdash; 03</div><div class="activity-name"><a href="https://www.alyeskaresort.com/experience/heli-vista-hiking-rafting" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">Heli Vista Hiking &amp; Rafting</a></div><div class="activity-meta">Helicopter + guided hike + float &middot; Full day</div><div class="activity-body">The big one. Helicopter into the backcountry, guided alpine hike, then float back down. This is the marquee activity. The float is mellow, not whitewater &mdash; Mammerz approved.</div><div class="activity-alert">High energy day. Don't stack after another big one.</div></div>
+<div class="divider"></div>
+<div class="activity"><div class="activity-num activity-num-menu">The Menu &mdash; 04</div><div class="activity-name"><a href="https://www.phillipscruises.com/prince-william-sound-glacier-cruise/" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">Prince William Sound Cruise</a></div><div class="activity-meta">6-hour catamaran out of Whittier &middot; ~26 passengers</div><div class="activity-body">Glaciers, humpbacks, orcas, sea otters, puffins. The 6-hour gives better chances at whale sightings. Not a private charter (the $8K quote was noted and respectfully declined), but 26 people is intimate enough.</div></div>
+<div class="divider"></div>
+<div class="activity"><div class="activity-num activity-num-menu">The Menu &mdash; 05</div><div class="activity-name"><a href="https://www.alyeskaresort.com/nordic-spa" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">Nordic Spa</a> + Portage Valley Hike</div><div class="activity-meta">Spa: 50,000 sq ft &middot; Hike: $140/person, 2-3 hrs</div><div class="activity-body">Morning hike through glacial ponds and valley (moose, bear, eagle sightings possible). Then: hot/cold pools, signature sauna, exfoliation cabin, massages. Two Trees Bistro for food and drinks. Adults only.</div><div class="activity-alert">Best late in the trip as recovery. Book spa and massages in advance.</div></div>
+<div class="divider"></div>
+<div class="activity"><div class="activity-num activity-num-fixed">Day 7 &mdash; Fixed</div><div class="activity-name">Last Morning: Fishing + Farewell</div><div class="activity-meta">$250/person &middot; ~3-4 hrs &middot; 15 min from Alyeska</div><div class="activity-body">On the water by 7 AM. Done by 11. Motorboat up Twenty-Mile River, glacier backdrop, salmon and trout from shore. Just your crew and one guide. Then farewell lunch in Anchorage before everyone scatters.</div></div>
+</section>
+
+<section id="food">
+<a href="#top" class="sec-back">&larr; Back to top</a>
+<h2 class="sec-title sec-title-food">Food</h2>
+<p class="sec-intro">Six dinners, seven nights. One is fixed (arrival). The rest pair with whatever activity day makes sense.</p>
+<div class="restaurant"><div class="restaurant-name"><a href="https://www.alyeskaresort.com/dining/two-trees-bistro" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">Two Trees Bistro</a></div><div class="restaurant-vibe">Nordic Spa &middot; Low-key &middot; On-resort</div><div class="restaurant-body">Arrival night dinner. Just Andy and Mams. Hot pools, mountain air, no agenda. Benji hasn't landed yet.</div><span class="restaurant-flag flag-fixed">Night 1 &mdash; Fixed</span></div>
+<div class="restaurant"><div class="restaurant-name"><a href="https://www.alyeskaresort.com/dining/seven-glaciers" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .15s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">Seven Glaciers</a></div><div class="restaurant-vibe">Four Diamond &middot; Tram-accessed &middot; Prix fixe tasting</div><div class="restaurant-body">2,300 ft above sea level. Local seafood, wild game, foraged ingredients. One of three Four Diamond restaurants in all of Alaska. Mammerz has been waiting for this one. Reserve with Lori.</div><span class="restaurant-flag flag-fixed">Pair with a big activity day</span></div>
+<div class="restaurant"><div class="restaurant-name"><a href="https://www.doublemuskyinn.com" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .15s" onmouseover="this.style.borderColor='var(--hot)'" onmouseout="this.style.borderColor='var(--border)'">Double Musky Inn</a></div><div class="restaurant-vibe">Cajun-Alaskan &middot; Log cabin &middot; Local legend since 1979</div><div class="restaurant-body">Twinkle lights. Mardi Gras in the wilderness. The French pepper steak is what Girdwood locals dream about. The place believes in butter. No reservations &mdash; arrive at 5 PM open. Benji will love every second.</div><span class="restaurant-flag flag-warning">Closed Mondays (Tue-Sun only)</span></div>
+<div class="restaurant"><div class="restaurant-name"><a href="https://www.alyeskaresort.com/dining/sakura-asian" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">Sakura</a></div><div class="restaurant-vibe">Asian fusion &middot; Sushi &middot; Steak &middot; On-resort</div><div class="restaurant-body">Low-key. Good after a long day on the water or in the mountains.</div><span class="restaurant-flag flag-flex">Flexible</span></div>
+<div class="restaurant"><div class="restaurant-name"><a href="https://www.alyeskaresort.com/dining/forte" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">Forte</a></div><div class="restaurant-vibe">Italian &middot; Elevated casual &middot; On-resort</div><div class="restaurant-body">Easy fallback after a big day. Pasta. Wine. Done.</div><span class="restaurant-flag flag-flex">Flexible</span></div>
+<div class="restaurant"><div class="restaurant-name"><a href="https://www.alyeskaresort.com/dining/abar" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">aBar</a></div><div class="restaurant-vibe">Bar + small plates &middot; On-resort</div><div class="restaurant-body">Casual option. Benji drinks. Jan gets her two glasses. Andy gets a sparkling water and the satisfaction of knowing he made this trip happen.</div><span class="restaurant-flag flag-flex">Flexible</span></div>
+</section>
+
+<section id="intel">
+<a href="#top" class="sec-back">&larr; Back to top</a>
+<h2 class="sec-title sec-title-intel">Intel</h2>
+<p class="sec-intro">Things worth knowing before wheels down.</p>
+<div class="nugget"><div class="nugget-label">Rental Car</div><div class="nugget-body">Picked up at ANC on arrival Jun 13. Returned before departure Jun 19. <a href="https://www.kayak.com/cars/Anchorage,AK-c21463/2026-06-13/2026-06-19" target="_blank" style="color:var(--cyan);text-decoration:underline;text-underline-offset:3px">Compare rental options</a>.</div></div>
+<div class="nugget"><div class="nugget-label">Seward Highway</div><div class="nugget-body">~40 min ANC to Girdwood. One of the most scenic drives in North America. <a href="https://www.google.com/maps/place/Turnagain+Arm/@60.95,-149.35,11z" target="_blank" style="color:var(--cyan);text-decoration:underline;text-underline-offset:3px">Turnagain Arm</a>, hanging glaciers, Dall sheep, possible beluga whales. Mammerz gets the window seat.</div></div>
+<div class="nugget"><div class="nugget-label">Concierge</div><div class="nugget-body">Lori Hibbs &mdash; <a href="mailto:lhibbs@alyeskaresort.com" style="color:var(--cyan);text-decoration:underline;text-underline-offset:3px">lhibbs@alyeskaresort.com</a> &mdash; 907-754-2108</div></div>
+<div class="nugget"><div class="nugget-label">Fishing Licenses</div><div class="nugget-body">Alaska fishing license required for all three. Arrange through your guide or in advance at <a href="https://www.adfg.alaska.gov/index.cfm?adfg=fishlicense.main" target="_blank" style="color:var(--cyan);text-decoration:underline;text-underline-offset:3px">adfg.state.ak.us</a>.</div></div>
+<div class="nugget"><div class="nugget-label">Double Musky Warning</div><div class="nugget-body">No reservations accepted. Closed Mondays. Arrive at 5 PM open or don't arrive at all.</div></div>
+<div class="nugget"><div class="nugget-label">What Got Cut</div><div class="nugget-body">Redoubt Bay Bear Viewing (not salmon season, spendy). Veilbreaker Skybridges (not open until July). Private boat charter ($8K &mdash; holy shit). Kayaking (needle in a haystack per Benji).</div></div>
+</section>
+
+<div class="footer">
+<div class="footer-quote">"I'm harder than a woodpecker's lips."</div>
+<p>&mdash; Andy, re: this t
