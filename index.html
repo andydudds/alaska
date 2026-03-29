@@ -15,7 +15,6 @@
 <meta name="twitter:description" content="Jun 13–19, 2026. Alyeska Resort, Girdwood. 6 nights. 3 Duddlestons. 0 bears.">
 <meta name="twitter:image" content="https://andydudds.github.io/alaska/favicon.png">
 <link rel="icon" type="image/png" href="favicon.png">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -117,8 +116,6 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 .sec-title-map{background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-card:nth-child(5)::before{background:var(--green)}
 #trip-map{height:420px;border-radius:8px;border:1px solid var(--border);overflow:hidden;margin-top:8px}
-#trip-map .leaflet-tile-pane{filter:invert(100%) hue-rotate(180deg) brightness(90%) contrast(85%)}
-#trip-map .leaflet-container{background:#0d1117}
 @media(max-width:480px){.nav-grid{grid-template-columns:1fr}.flight-detail{flex-direction:column;gap:4px}.tree-sons{gap:12px}.tree-son{min-width:100px;padding:10px 16px}}
 </style>
 </head>
@@ -210,7 +207,19 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 <a href="#top" class="sec-back">&larr; Back to top</a>
 <h2 class="sec-title sec-title-map">Map</h2>
 <p class="sec-intro">Locked days in cyan. Mini-outings in orange. Home base in gold.</p>
-<div id="trip-map"></div>
+<div style="border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-top:8px">
+<iframe src="https://maps.google.com/maps?q=60.72,-149.4&t=k&z=8&ie=UTF8&iwloc=&output=embed" width="100%" height="420" style="border:0;display:block;filter:saturate(0.7) brightness(0.85)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+<div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;border-left:3px solid var(--gold)"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:4px">Home Base</div><div style="font-size:13px;font-weight:700"><a href="https://maps.google.com/?q=Alyeska+Resort+Girdwood+Alaska" target="_blank" style="color:var(--text);text-decoration:underline;text-underline-offset:3px">Alyeska Resort</a></div></div>
+<div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;border-left:3px solid var(--cyan)"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px">Day 3 &mdash; Jun 15</div><div style="font-size:13px;font-weight:700"><a href="https://maps.google.com/?q=Rust's+Flying+Service+Lake+Hood+Anchorage" target="_blank" style="color:var(--text);text-decoration:underline;text-underline-offset:3px">Rust&rsquo;s Flying Service</a></div></div>
+<div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;border-left:3px solid var(--cyan)"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px">Day 4 &mdash; Jun 16</div><div style="font-size:13px;font-weight:700"><a href="https://maps.google.com/?q=Spencer+Glacier+Alaska" target="_blank" style="color:var(--text);text-decoration:underline;text-underline-offset:3px">Spencer Glacier</a></div></div>
+<div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;border-left:3px solid var(--cyan)"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px">Day 5 &mdash; Jun 17</div><div style="font-size:13px;font-weight:700"><a href="https://maps.google.com/?q=Alyeska+Resort+Girdwood+Alaska" target="_blank" style="color:var(--text);text-decoration:underline;text-underline-offset:3px">Alyeska (hotel pickup)</a></div></div>
+<div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;border-left:3px solid var(--cyan)"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px">Day 6 &mdash; Jun 18</div><div style="font-size:13px;font-weight:700"><a href="https://maps.google.com/?q=Whittier+Alaska" target="_blank" style="color:var(--text);text-decoration:underline;text-underline-offset:3px">Whittier</a></div></div>
+<div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;border-left:3px solid var(--orange)"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:4px">Mini-Outing A</div><div style="font-size:13px;font-weight:700"><a href="https://maps.google.com/?q=Cooper+Landing+Alaska" target="_blank" style="color:var(--text);text-decoration:underline;text-underline-offset:3px">Cooper Landing</a></div></div>
+<div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;border-left:3px solid var(--orange)"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:4px">Mini-Outing B</div><div style="font-size:13px;font-weight:700"><a href="https://maps.google.com/?q=Exit+Glacier+Kenai+Fjords+Alaska" target="_blank" style="color:var(--text);text-decoration:underline;text-underline-offset:3px">Exit Glacier / Seward</a></div></div>
+<div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;border-left:3px solid var(--orange)"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:4px">Mini-Outing C</div><div style="font-size:13px;font-weight:700"><a href="https://maps.google.com/?q=Skilak+Lake+Alaska" target="_blank" style="color:var(--text);text-decoration:underline;text-underline-offset:3px">Skilak Lake</a></div></div>
+</div>
 </section>
 
 <section id="food">
@@ -247,38 +256,8 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 <div class="footer-version" style="margin-top:16px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,.15);letter-spacing:2px">ALASKA 2026 &mdash; DUDDLESTON</div>
 </div>
 </body>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function(){
-  window.addEventListener('load', function(){
-  var mapEl = document.getElementById('trip-map');
-  if(mapEl){
-    var map = L.map('trip-map', {scrollWheelZoom:false}).setView([60.72, -149.4], 8);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom:19
-    }).addTo(map);
-
-    function dot(color, size, glow){
-      return L.divIcon({className:'',html:'<div style="background:'+color+';width:'+size+'px;height:'+size+'px;border-radius:50%;border:2px solid '+color+'44;box-shadow:0 0 10px '+color+glow+'"></div>',iconSize:[size,size],iconAnchor:[size/2,size/2]});
-    }
-    var gold  = dot('#ffd000',14,'99');
-    var cyan  = dot('#00f0d4',12,'88');
-    var orange= dot('#ff8a3d',10,'66');
-
-    var base  = gold;
-    var locked= cyan;
-    var mini  = orange;
-
-    L.marker([60.9701,-149.1083],{icon:base}).bindPopup('<b>Alyeska Resort</b><br>Home base').addTo(map);
-    L.marker([61.1881,-149.9739],{icon:locked}).bindPopup('<b>Day 3 &mdash; Denali</b><br>Rust's Flying Service<br>Lake Hood Floatplane Base').addTo(map);
-    L.marker([60.8050,-149.1800],{icon:locked}).bindPopup('<b>Day 4 &mdash; Heli Hiking &amp; Rafting</b><br>Spencer Glacier Lake<br>Chugach Adventures').addTo(map);
-    L.marker([60.9701,-149.1083],{icon:locked}).bindPopup('<b>Day 5 &mdash; Glacier Dog Sledding</b><br>Alpine Air Alaska<br>Hotel pickup 10:25 AM').addTo(map);
-    L.marker([60.7736,-148.6829],{icon:locked}).bindPopup('<b>Day 6 &mdash; 26 Glacier Cruise</b><br>Phillips Cruises<br>Whittier').addTo(map);
-    L.marker([60.4894,-149.8969],{icon:mini}).bindPopup('<b>Option A</b><br>Cooper Landing &amp; Russian River Falls').addTo(map);
-    L.marker([60.1861,-149.6317],{icon:mini}).bindPopup('<b>Option B</b><br>Kenai Fjords &amp; Exit Glacier').addTo(map);
-    L.marker([60.4500,-150.4167],{icon:mini}).bindPopup('<b>Option C</b><br>Skilak Lake Loop').addTo(map);
-  }
-  });
 })();
 (function(){
   var depart = new Date('2026-06-13T00:00:00');
