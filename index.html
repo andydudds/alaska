@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alaska 2026 - Duddleston</title>
+<meta name="description" content="Jun 13–19, 2026. Alyeska Resort, Girdwood. 6 nights. 3 Duddlestons. 0 bears.">
+<meta property="og:title" content="Alaska 2026 — Duddleston">
+<meta property="og:description" content="Jun 13–19, 2026. Alyeska Resort, Girdwood. 6 nights. 3 Duddlestons. 0 bears.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://andydudds.github.io/alaska/">
+<meta property="og:image" content="https://andydudds.github.io/alaska/favicon.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Alaska 2026 — Duddleston">
+<meta name="twitter:description" content="Jun 13–19, 2026. Alyeska Resort, Girdwood. 6 nights. 3 Duddlestons. 0 bears.">
+<meta name="twitter:image" content="https://andydudds.github.io/alaska/favicon.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -207,4 +217,28 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 
 <div class="footer">
 <div class="footer-quote">"I'm harder than a woodpecker's lips."</div>
-<p>&mdash; Andy, re: this t
+<p>&mdash; Andy, re: this trip</p>
+<div class="footer-countdown" id="countdown" style="margin-top:28px;font-family:'Space Mono',monospace;font-size:13px;color:var(--cyan);letter-spacing:2px;text-shadow:0 0 16px rgba(0,240,212,.3)"></div>
+<div class="footer-version" style="margin-top:16px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,.15);letter-spacing:2px">ALASKA 2026 &mdash; DUDDLESTON</div>
+</div>
+</body>
+<script>
+(function(){
+  var depart = new Date('2026-06-13T00:00:00');
+  function tick(){
+    var now = new Date();
+    var diff = depart - now;
+    var el = document.getElementById('countdown');
+    if(!el) return;
+    if(diff <= 0){ el.textContent = 'WHEELS UP.'; return; }
+    var d = Math.floor(diff/864e5);
+    var h = Math.floor((diff%864e5)/36e5);
+    var m = Math.floor((diff%36e5)/6e4);
+    var s = Math.floor((diff%6e4)/1e3);
+    el.textContent = d + 'd ' + h + 'h ' + m + 'm ' + s + 's until wheels up';
+    setTimeout(tick, 1000);
+  }
+  tick();
+})();
+</script>
+</html>
