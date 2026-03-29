@@ -207,86 +207,114 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 <a href="#top" class="sec-back">&larr; Back to top</a>
 <h2 class="sec-title sec-title-map">Map</h2>
 <p class="sec-intro">Locked days in cyan. Mini-outings in orange. Home base in gold.</p>
-<svg viewBox="0 0 580 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:420px;border-radius:8px;border:1px solid rgba(255,255,255,.08);display:block;background:#060d18">
+<svg viewBox="0 0 580 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:460px;border-radius:8px;border:1px solid rgba(255,255,255,.08);display:block">
   <defs>
-    <filter id="glow-c"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="glow-g"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="wg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#071e30"/>
+      <stop offset="100%" stop-color="#030e18"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
 
-  <!-- Water / background -->
-  <rect width="580" height="400" fill="#060d18"/>
-  <!-- Cook Inlet -->
-  <polygon points="0,100 120,90 140,160 100,240 60,300 0,320" fill="#0a1f2e" opacity="0.9"/>
-  <!-- Prince William Sound -->
-  <polygon points="490,100 580,80 580,260 520,240 480,200 460,160" fill="#0a1f2e" opacity="0.9"/>
-  <!-- Gulf of Alaska south -->
-  <polygon points="0,380 580,380 580,400 0,400" fill="#0a1f2e" opacity="0.6"/>
-  <polygon points="100,340 200,370 310,380 420,370 500,350 540,380 580,370 580,400 0,400 0,360" fill="#0a1f2e" opacity="0.8"/>
+  <!-- Ocean base -->
+  <rect width="580" height="420" fill="url(#wg)"/>
 
-  <!-- Kenai Peninsula land mass -->
-  <polygon points="130,155 200,130 310,125 390,130 470,155 490,185 500,220 480,260 460,300 420,340 380,370 340,380 290,375 240,360 190,330 155,290 130,240 115,200" fill="#141e2d" stroke="#1e2f45" stroke-width="1"/>
-  <!-- Mainland north -->
-  <polygon points="0,0 580,0 580,110 470,115 390,108 310,103 200,108 120,118 60,130 0,135" fill="#141e2d" stroke="#1e2f45" stroke-width="1"/>
-  <!-- Mountains hint in center -->
-  <polygon points="280,170 300,148 320,165 345,145 365,168 385,150 400,170 370,180 340,162 315,178 290,165" fill="#1c2b3e" opacity="0.7"/>
+  <!-- Cook Inlet (left water body) -->
+  <polygon points="0,78 60,88 110,100 145,112 148,145 138,178 125,215 118,250 122,285 138,318 150,345 120,360 80,370 0,365" fill="#061522" opacity="0.95"/>
+  <text x="38" y="225" fill="rgba(100,160,200,0.25)" font-size="9" font-family="monospace" transform="rotate(-75,38,225)" letter-spacing="2">COOK INLET</text>
 
-  <!-- Turnagain Arm water -->
-  <polygon points="200,128 390,130 410,148 395,158 200,155 175,142" fill="#0a1f2e" opacity="0.85"/>
+  <!-- Prince William Sound (right water) -->
+  <polygon points="460,162 488,188 505,218 515,250 520,280 510,310 500,340 520,360 550,370 580,360 580,130 550,118 520,105 495,100 475,110 462,130" fill="#061522" opacity="0.9"/>
+  <text x="530" y="210" fill="rgba(100,160,200,0.22)" font-size="8" font-family="monospace" transform="rotate(90,530,210)" letter-spacing="1.5">PRINCE WILLIAM SOUND</text>
 
-  <!-- Seward Highway (Anchorage → Girdwood → Cooper Landing → Seward) -->
-  <polyline points="312,126 380,148 418,160 370,222 321,235 355,290" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" stroke-dasharray="5,4"/>
-  <!-- Sterling Hwy branch (Cooper Landing → Skilak) -->
-  <polyline points="321,235 257,241" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.2" stroke-dasharray="4,4"/>
-  <!-- Road to Whittier -->
-  <polyline points="418,160 445,175 471,191" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.2" stroke-dasharray="4,4"/>
+  <!-- Gulf of Alaska (south) -->
+  <polygon points="0,370 100,355 160,358 220,368 280,375 340,375 390,365 440,348 490,345 540,358 580,360 580,420 0,420" fill="#061522" opacity="0.9"/>
+  <text x="260" y="408" fill="rgba(100,160,200,0.2)" font-size="9" font-family="monospace" letter-spacing="3" text-anchor="middle">GULF OF ALASKA</text>
 
-  <!-- Road labels -->
-  <text x="325" y="195" fill="rgba(255,255,255,0.22)" font-size="8" font-family="monospace" transform="rotate(-62,325,195)">SEWARD HWY</text>
+  <!-- Mainland (top land mass, north of Turnagain Arm) -->
+  <polygon points="0,0 580,0 580,72 520,62 460,55 400,55 340,52 280,55 220,58 165,66 110,76 55,82 0,78" fill="#151f2e" stroke="#1d2e42" stroke-width="0.8"/>
 
-  <!-- HOME BASE: Alyeska Resort (gold) -->
-  <circle cx="418" cy="160" r="8" fill="#ffd000" opacity="0.25" filter="url(#glow-g)"/>
-  <circle cx="418" cy="160" r="5" fill="#ffd000"/>
-  <text x="424" y="155" fill="#ffd000" font-size="9" font-family="monospace" font-weight="bold">ALYESKA</text>
+  <!-- Kenai Peninsula -->
+  <polygon points="170,128 202,120 245,116 292,116 335,118 375,122 398,128 428,143 452,162 474,186 482,215 470,248 452,278 428,305 400,328 370,346 340,358 308,362 276,356 248,342 222,322 202,298 186,270 175,242 168,215 165,188 164,162 165,143 170,128" fill="#151f2e" stroke="#1d2e42" stroke-width="0.8"/>
 
-  <!-- Day 3: Rust's Flying Service / Anchorage (cyan) -->
-  <circle cx="312" cy="126" r="6" fill="#00f0d4" opacity="0.2" filter="url(#glow-c)"/>
-  <circle cx="312" cy="126" r="4" fill="#00f0d4"/>
-  <text x="318" y="122" fill="#00f0d4" font-size="8" font-family="monospace">ANCHORAGE</text>
-  <text x="318" y="131" fill="rgba(0,240,212,0.6)" font-size="7" font-family="monospace">D3 · RUST'S</text>
+  <!-- Turnagain Arm (water gap between mainland and peninsula) -->
+  <polygon points="148,80 195,74 255,68 320,68 375,73 405,82 425,95 428,110 418,120 395,122 345,118 292,115 235,116 190,120 168,125 155,118 148,105 148,80" fill="#061522" opacity="0.88"/>
 
-  <!-- Day 4: Spencer Glacier (cyan) -->
-  <circle cx="409" cy="186" r="6" fill="#00f0d4" opacity="0.2" filter="url(#glow-c)"/>
-  <circle cx="409" cy="186" r="4" fill="#00f0d4"/>
-  <text x="415" y="183" fill="#00f0d4" font-size="8" font-family="monospace">SPENCER</text>
-  <text x="415" y="192" fill="rgba(0,240,212,0.6)" font-size="7" font-family="monospace">D4 · HELI HIKE</text>
+  <!-- Chugach Mountains hint -->
+  <polygon points="330,72 350,60 372,70 395,58 418,68 435,80 430,92 410,98 390,90 368,100 348,90 335,82" fill="#1d2e44" opacity="0.7"/>
+  <polygon points="398,128 415,118 430,128 442,120 453,130 445,140 430,138 415,135" fill="#1d2e44" opacity="0.5"/>
 
-  <!-- Day 6: Whittier (cyan) -->
-  <circle cx="471" cy="191" r="6" fill="#00f0d4" opacity="0.2" filter="url(#glow-c)"/>
-  <circle cx="471" cy="191" r="4" fill="#00f0d4"/>
-  <text x="477" y="188" fill="#00f0d4" font-size="8" font-family="monospace">WHITTIER</text>
-  <text x="477" y="197" fill="rgba(0,240,212,0.6)" font-size="7" font-family="monospace">D6 · CRUISE</text>
+  <!-- Kenai Mountains (west side interior) -->
+  <polygon points="220,150 238,138 255,150 270,140 285,152 275,162 258,158 242,162" fill="#1d2e44" opacity="0.45"/>
+
+  <!-- Roads -->
+  <!-- Seward Hwy: Anchorage → Girdwood/Alyeska → Cooper Landing → Seward -->
+  <polyline points="292,83 342,95 398,128 372,182 308,205 348,268" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.8" stroke-dasharray="6,4"/>
+  <!-- Sterling Hwy branch: Cooper Landing → Skilak Lake -->
+  <polyline points="308,205 248,210" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.3" stroke-dasharray="4,4"/>
+  <!-- Access to Whittier: Alyeska → Portage → Whittier tunnel -->
+  <polyline points="398,128 425,145 452,162" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.3" stroke-dasharray="3,3"/>
+
+  <!-- Road label -->
+  <text x="348" y="172" fill="rgba(255,255,255,0.2)" font-size="7.5" font-family="monospace" transform="rotate(-65,348,172)" letter-spacing="1">SEWARD HWY</text>
+
+  <!-- ═══ MARKERS ═══ -->
+
+  <!-- HOME BASE: Alyeska (gold) -->
+  <circle cx="398" cy="128" r="12" fill="#ffd000" opacity="0.15" filter="url(#glow)"/>
+  <circle cx="398" cy="128" r="6" fill="#ffd000" stroke="#ffd000" stroke-width="1.5" opacity="0.9"/>
+  <line x1="398" y1="122" x2="398" y2="108" stroke="#ffd000" stroke-width="0.8" opacity="0.5"/>
+  <text x="403" y="107" fill="#ffd000" font-size="9.5" font-family="monospace" font-weight="bold">ALYESKA</text>
+  <text x="403" y="117" fill="rgba(255,208,0,0.55)" font-size="7" font-family="monospace">HOME BASE</text>
+
+  <!-- Day 3: Anchorage / Rust's (cyan) -->
+  <circle cx="292" cy="83" r="10" fill="#00f0d4" opacity="0.12" filter="url(#glow)"/>
+  <circle cx="292" cy="83" r="5" fill="#00f0d4" opacity="0.9"/>
+  <line x1="292" y1="78" x2="245" y2="62" stroke="#00f0d4" stroke-width="0.8" opacity="0.4"/>
+  <text x="182" y="60" fill="#00f0d4" font-size="9" font-family="monospace">ANCHORAGE</text>
+  <text x="182" y="70" fill="rgba(0,240,212,0.5)" font-size="7" font-family="monospace">D3 · RUST'S FLYING SERVICE</text>
+
+  <!-- Day 4: Spencer Glacier (cyan) — label below left -->
+  <circle cx="385" cy="150" r="9" fill="#00f0d4" opacity="0.12" filter="url(#glow)"/>
+  <circle cx="385" cy="150" r="4.5" fill="#00f0d4" opacity="0.9"/>
+  <line x1="382" y1="154" x2="360" y2="172" stroke="#00f0d4" stroke-width="0.8" opacity="0.4"/>
+  <text x="290" y="177" fill="#00f0d4" font-size="9" font-family="monospace">SPENCER GLACIER</text>
+  <text x="290" y="187" fill="rgba(0,240,212,0.5)" font-size="7" font-family="monospace">D4 · HELI HIKING &amp; RAFTING</text>
+
+  <!-- Day 6: Whittier (cyan) — label right -->
+  <circle cx="452" cy="162" r="9" fill="#00f0d4" opacity="0.12" filter="url(#glow)"/>
+  <circle cx="452" cy="162" r="4.5" fill="#00f0d4" opacity="0.9"/>
+  <line x1="456" y1="160" x2="472" y2="152" stroke="#00f0d4" stroke-width="0.8" opacity="0.4"/>
+  <text x="474" y="152" fill="#00f0d4" font-size="9" font-family="monospace">WHITTIER</text>
+  <text x="474" y="162" fill="rgba(0,240,212,0.5)" font-size="7" font-family="monospace">D6 · 26 GLACIER CRUISE</text>
 
   <!-- Mini A: Cooper Landing (orange) -->
-  <circle cx="321" cy="235" r="5" fill="#ff8a3d" opacity="0.2"/>
-  <circle cx="321" cy="235" r="3.5" fill="#ff8a3d"/>
-  <text x="327" y="239" fill="#ff8a3d" font-size="8" font-family="monospace">COOPER LANDING</text>
+  <circle cx="308" cy="205" r="7" fill="#ff8a3d" opacity="0.15"/>
+  <circle cx="308" cy="205" r="4" fill="#ff8a3d" opacity="0.9"/>
+  <line x1="306" y1="209" x2="295" y2="228" stroke="#ff8a3d" stroke-width="0.8" opacity="0.4"/>
+  <text x="240" y="236" fill="#ff8a3d" font-size="8.5" font-family="monospace">COOPER LANDING</text>
+  <text x="240" y="245" fill="rgba(255,138,61,0.5)" font-size="7" font-family="monospace">MINI-OUTING A</text>
 
-  <!-- Mini B: Exit Glacier / Seward (orange) -->
-  <circle cx="355" cy="290" r="5" fill="#ff8a3d" opacity="0.2"/>
-  <circle cx="355" cy="290" r="3.5" fill="#ff8a3d"/>
-  <text x="361" y="294" fill="#ff8a3d" font-size="8" font-family="monospace">SEWARD / EXIT GLACIER</text>
+  <!-- Mini B: Seward / Exit Glacier (orange) -->
+  <circle cx="348" cy="268" r="7" fill="#ff8a3d" opacity="0.15"/>
+  <circle cx="348" cy="268" r="4" fill="#ff8a3d" opacity="0.9"/>
+  <line x1="352" y1="268" x2="368" y2="268" stroke="#ff8a3d" stroke-width="0.8" opacity="0.4"/>
+  <text x="370" y="265" fill="#ff8a3d" font-size="8.5" font-family="monospace">SEWARD / EXIT GLACIER</text>
+  <text x="370" y="274" fill="rgba(255,138,61,0.5)" font-size="7" font-family="monospace">MINI-OUTING B · KENAI FJORDS</text>
 
   <!-- Mini C: Skilak Lake (orange) -->
-  <circle cx="257" cy="241" r="5" fill="#ff8a3d" opacity="0.2"/>
-  <circle cx="257" cy="241" r="3.5" fill="#ff8a3d"/>
-  <text x="210" y="238" fill="#ff8a3d" font-size="8" font-family="monospace" text-anchor="end">SKILAK LAKE</text>
+  <circle cx="248" cy="210" r="7" fill="#ff8a3d" opacity="0.15"/>
+  <circle cx="248" cy="210" r="4" fill="#ff8a3d" opacity="0.9"/>
+  <line x1="244" y1="210" x2="225" y2="210" stroke="#ff8a3d" stroke-width="0.8" opacity="0.4"/>
+  <text x="148" y="207" fill="#ff8a3d" font-size="8.5" font-family="monospace" text-anchor="start">SKILAK LAKE</text>
+  <text x="148" y="216" fill="rgba(255,138,61,0.5)" font-size="7" font-family="monospace" text-anchor="start">MINI-OUTING C</text>
 
-  <!-- Compass rose -->
-  <text x="548" y="390" fill="rgba(255,255,255,0.2)" font-size="11" font-family="monospace">N↑</text>
-
-  <!-- Scale label -->
-  <line x1="30" y1="385" x2="90" y2="385" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-  <text x="35" y="378" fill="rgba(255,255,255,0.2)" font-size="7" font-family="monospace">~60 mi</text>
+  <!-- Compass + scale -->
+  <text x="548" y="408" fill="rgba(255,255,255,0.25)" font-size="11" font-family="monospace" font-weight="bold">N↑</text>
+  <line x1="22" y1="403" x2="90" y2="403" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+  <line x1="22" y1="400" x2="22" y2="406" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+  <line x1="90" y1="400" x2="90" y2="406" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+  <text x="56" y="398" fill="rgba(255,255,255,0.22)" font-size="7" font-family="monospace" text-anchor="middle">~80 mi</text>
 </svg>
 <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
 <div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;border-left:3px solid var(--gold)"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:4px">Home Base</div><div style="font-size:13px;font-weight:700"><a href="https://maps.google.com/?q=Alyeska+Resort+Girdwood+Alaska" target="_blank" style="color:var(--text);text-decoration:underline;text-underline-offset:3px">Alyeska Resort</a></div></div>
