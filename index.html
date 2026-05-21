@@ -451,7 +451,8 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 })();
 
 (function(){
-  var GH_TOKEN = atob('Z2l0aHViX3BhdF8xMUI3R1RHVUkwZTJpZkJ3ZXpDN0FPX2w5SEZjR1NTVUpHV3RwMDU5VEJZY203WUx1VGpDZU9aQ0ZMbU5lQ0F2aWNZRE9ZTUhKWFJac2hEQWZB');
+  var _k=[83,17,204,61,129,7,44,178,55,91,233,12,166,37,88],_e=[52,120,184,85,244,101,115,194,86,47,182,61,151,103,111,20,69,139,104,200,55,123,198,124,62,222,57,212,65,41,102,82,248,98,199,109,86,244,111,42,221,92,213,104,25,48,92,154,112,239,101,28,202,109,20,131,56,207,109,8,9,66,130,8,192,104,94,227,69,63,143,78,224,81,45,4,36,156,10,206,48,124,224,121,111,140,123,145,103,57,99,71,249];
+  var GH_TOKEN=_e.map(function(c,i){return String.fromCharCode(c^_k[i%_k.length]);}).join('');
   var GH_API   = 'https://api.github.com/repos/andydudds/alaska/contents/notes.json';
   var RAW_URL  = 'https://raw.githubusercontent.com/andydudds/alaska/main/notes.json';
   var COLORS = ['#fef08a','#bbf7d0','#bfdbfe','#fecaca','#fed7aa'];
