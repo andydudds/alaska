@@ -493,23 +493,25 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
       .catch(function(){ if(!silent) setStatus('offline', '#f87171'); });
   }
 
-  function pushNotes(){
+  function pushNotes(attempt){
+    if(!attempt) attempt = 0;
     setStatus('saving…', 'rgba(255,255,255,.4)');
     fetch(GH_API, {headers:{'Authorization':'Bearer '+GH_TOKEN,'Accept':'application/vnd.github+json'}})
       .then(function(r){ if(!r.ok) throw new Error('sha-fetch '+r.status); return r.json(); })
       .then(function(meta){
-        var sha = meta.sha;
-        var body = JSON.stringify({notes: _notes});
-        // Safe base64 encode for all unicode
-        var b64 = btoa(encodeURIComponent(body).replace(/%([0-9A-F]{2})/g, function(m,p){ return String.fromCharCode('0x'+p); }));
+        var b64 = btoa(encodeURIComponent(JSON.stringify({notes:_notes})).replace(/%([0-9A-F]{2})/g,function(m,p){return String.fromCharCode('0x'+p);}));
         return fetch(GH_API, {
           method: 'PUT',
           headers:{'Authorization':'Bearer '+GH_TOKEN,'Content-Type':'application/json','Accept':'application/vnd.github+json'},
-          body: JSON.stringify({message:'update notes', content: b64, sha: sha})
+          body: JSON.stringify({message:'update notes', content: b64, sha: meta.sha})
         });
       })
-      .then(function(r){ if(!r.ok) return r.json().then(function(e){ throw new Error(r.status+' '+e.message); }); return r.json(); })
-      .then(function(){ setStatus('saved ✓', 'rgba(0,240,212,.6)'); })
+      .then(function(r){
+        if(r.status === 409 && attempt < 2){ setTimeout(function(){ pushNotes(attempt+1); }, 400); return null; }
+        if(!r.ok) return r.json().then(function(e){ throw new Error(r.status+' '+e.message); });
+        return r.json();
+      })
+      .then(function(d){ if(d) setStatus('saved ✓', 'rgba(0,240,212,.6)'); })
       .catch(function(err){ setStatus('failed: '+(err.message||err), '#f87171'); });
   }
 
