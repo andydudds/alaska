@@ -471,6 +471,7 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
   var _notes = [];
   var _saving = false;
   var _sha = null;
+  var _lastPushTime = 0;
 
   function setStatus(msg, color){
     var el = document.getElementById('notes-status');
@@ -484,6 +485,9 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
     return fetch(RAW_URL + '?t=' + Date.now())
       .then(function(r){ return r.json(); })
       .then(function(data){
+        // GitHub's raw CDN can serve stale content for ~5 min after a write.
+        // Skip poll updates for 60s after a successful save to avoid reverting.
+        if(silent && Date.now() - _lastPushTime < 60000) return;
         var incoming = (data && Array.isArray(data.notes)) ? data.notes : [];
         var changed = JSON.stringify(incoming) !== JSON.stringify(_notes);
         _notes = incoming;
@@ -511,7 +515,7 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
         if(!r.ok) return r.json().then(function(e){ throw new Error(r.status+' '+e.message); });
         return r.json();
       })
-      .then(function(d){ if(d) setStatus('saved ✓', 'rgba(0,240,212,.6)'); })
+      .then(function(d){ if(d){ _lastPushTime = Date.now(); setStatus('saved ✓', 'rgba(0,240,212,.6)'); } })
       .catch(function(err){ setStatus('failed: '+(err.message||err), '#f87171'); });
   }
 
