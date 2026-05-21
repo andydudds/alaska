@@ -115,6 +115,9 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 .activity-num-outing{color:var(--orange)}
 .sec-title-map{background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-card:nth-child(5)::before{background:var(--green)}
+.nav-card:nth-child(6)::before{background:#fbbf24}
+@keyframes wiggle{0%,100%{transform:translateY(0) rotate(0)}20%{transform:translateY(-4px) rotate(-2deg)}40%{transform:translateY(0) rotate(2deg)}60%{transform:translateY(-3px) rotate(-1.5deg)}80%{transform:translateY(0) rotate(1deg)}}
+#hero-countdown.wiggle{animation:wiggle .7s ease-in-out}
 #trip-map{height:420px;border-radius:8px;border:1px solid var(--border);overflow:hidden;margin-top:8px}
 @media(max-width:480px){.nav-grid{grid-template-columns:1fr}.flight-detail{flex-direction:column;gap:4px}.tree-sons{gap:12px}.tree-son{min-width:100px;padding:10px 16px}}
 </style>
@@ -135,6 +138,7 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 <h1 class="hero-title">Alaska.</h1>
 <p class="hero-sub"><a href="https://www.alyeskaresort.com" target="_blank" style="color:var(--dim);text-decoration:underline;text-underline-offset:3px;transition:color .15s" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--dim)'">Alyeska Resort</a>, <a href="https://www.google.com/maps/place/Alyeska+Resort/@60.9604,-149.1079,14z" target="_blank" style="color:var(--dim);text-decoration:underline;text-underline-offset:3px;transition:color .15s" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--dim)'">Girdwood</a> &amp; beyond.</p>
 <p class="hero-date">6 NIGHTS &middot; 3 DUDDLESTONS &middot; 0 BEARS</p>
+<div id="hero-countdown" style="font-family:'Space Mono',monospace;font-size:13px;color:var(--cyan);letter-spacing:2px;text-shadow:0 0 16px rgba(0,240,212,.3);margin-bottom:32px;cursor:default"></div>
 <div class="hero-cast">
 <div class="family-tree">
 <div class="tree-mom"><strong>Jan</strong><span>The Matriarch</span></div>
@@ -150,7 +154,8 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 <a href="#activities" class="nav-card"><div class="nav-icon">&#127956;</div><div><div class="nav-label">Activities</div><div class="nav-desc">The menu</div></div></a>
 <a href="#food" class="nav-card"><div class="nav-icon">&#127860;</div><div><div class="nav-label">Food</div><div class="nav-desc">Where we eat</div></div></a>
 <a href="#intel" class="nav-card"><div class="nav-icon">&#129504;</div><div><div class="nav-label">Intel</div><div class="nav-desc">Need to know</div></div></a>
-<a href="#map" class="nav-card" style="grid-column:span 2"><div class="nav-icon">&#128506;&#65039;</div><div><div class="nav-label">Map</div><div class="nav-desc">The territory</div></div></a>
+<a href="#map" class="nav-card"><div class="nav-icon">&#128506;&#65039;</div><div><div class="nav-label">Map</div><div class="nav-desc">The territory</div></div></a>
+<a href="#notes" class="nav-card"><div class="nav-icon">&#128221;</div><div><div class="nav-label">Crew Notes</div><div class="nav-desc">The bulletin board</div></div></a>
 </div>
 </div>
 
@@ -378,7 +383,7 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 <div class="footer">
 <div class="footer-quote">"I'm harder than a woodpecker's lips."</div>
 <p>&mdash; Andy, re: this trip</p>
-<div class="footer-countdown" id="countdown" style="margin-top:28px;font-family:'Space Mono',monospace;font-size:13px;color:var(--cyan);letter-spacing:2px;text-shadow:0 0 16px rgba(0,240,212,.3)"></div>
+
 <div class="footer-version" style="margin-top:16px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,.15);letter-spacing:2px">ALASKA 2026 &mdash; DUDDLESTON</div>
 </div>
 </body>
@@ -390,17 +395,31 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
   function tick(){
     var now = new Date();
     var diff = depart - now;
-    var el = document.getElementById('countdown');
+    var el = document.getElementById('hero-countdown');
     if(!el) return;
-    if(diff <= 0){ el.textContent = 'WHEELS UP.'; return; }
+    if(diff <= 0){ el.textContent = 'WHEELS UP ✈️'; el.style.color='var(--hot)'; el.style.textShadow='0 0 20px rgba(255,45,85,.6)'; return; }
     var d = Math.floor(diff/864e5);
     var h = Math.floor((diff%864e5)/36e5);
     var m = Math.floor((diff%36e5)/6e4);
     var s = Math.floor((diff%6e4)/1e3);
     el.textContent = d + 'd ' + h + 'h ' + m + 'm ' + s + 's until wheels up';
+    if(d < 10){
+      el.style.color = 'var(--hot)';
+      el.style.textShadow = '0 0 20px rgba(255,45,85,.5)';
+    } else {
+      el.style.color = 'var(--cyan)';
+      el.style.textShadow = '0 0 16px rgba(0,240,212,.3)';
+    }
     setTimeout(tick, 1000);
   }
   tick();
+  // wiggle on load after 600ms
+  setTimeout(function(){
+    var el = document.getElementById('hero-countdown');
+    if(!el) return;
+    el.classList.add('wiggle');
+    setTimeout(function(){ el.classList.remove('wiggle'); }, 800);
+  }, 600);
 })();
 
 (function(){
