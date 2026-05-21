@@ -117,14 +117,16 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 .nav-card:nth-child(5)::before{background:var(--green)}
 .nav-card:nth-child(6)::before{background:#fbbf24}
 @keyframes aurora{
-  0%,100%{opacity:.55;transform:scaleX(1) translateY(0)}
-  33%{opacity:.75;transform:scaleX(1.04) translateY(-6px)}
-  66%{opacity:.45;transform:scaleX(.97) translateY(4px)}
+  0%,100%{opacity:1;transform:scaleX(1) translateY(0) skewX(0deg)}
+  25%{opacity:1.3;transform:scaleX(1.05) translateY(-10px) skewX(1deg)}
+  50%{opacity:.7;transform:scaleX(.98) translateY(6px) skewX(-1deg)}
+  75%{opacity:1.1;transform:scaleX(1.03) translateY(-4px) skewX(.5deg)}
 }
 @keyframes aurora2{
-  0%,100%{opacity:.35;transform:scaleX(1) translateY(0)}
-  40%{opacity:.6;transform:scaleX(1.06) translateY(8px)}
-  70%{opacity:.25;transform:scaleX(.95) translateY(-5px)}
+  0%,100%{opacity:1;transform:scaleX(1) translateY(0) skewX(0deg)}
+  30%{opacity:1.4;transform:scaleX(1.07) translateY(12px) skewX(-1.5deg)}
+  60%{opacity:.6;transform:scaleX(.96) translateY(-8px) skewX(1deg)}
+  80%{opacity:1.2;transform:scaleX(1.04) translateY(5px) skewX(-.5deg)}
 }
 @keyframes wiggle{0%,100%{transform:translateY(0) rotate(0)}20%{transform:translateY(-4px) rotate(-2deg)}40%{transform:translateY(0) rotate(2deg)}60%{transform:translateY(-3px) rotate(-1.5deg)}80%{transform:translateY(0) rotate(1deg)}}
 #hero-countdown.wiggle{animation:wiggle .7s ease-in-out}
@@ -136,32 +138,41 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
 <div class="glow glow-3"></div>
-<svg class="mountain-bg" viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0,400 L0,280 L80,240 L160,260 L240,200 L320,220 L400,160 L440,180 L520,120 L600,150 L680,100 L720,130 L800,80 L880,120 L960,90 L1040,140 L1120,100 L1200,160 L1280,130 L1360,180 L1440,150 L1440,400Z" fill="rgba(0,240,212,.015)"/>
-<path d="M0,400 L0,320 L100,290 L200,310 L300,260 L380,280 L460,230 L540,250 L620,200 L700,230 L780,180 L860,210 L940,170 L1020,200 L1100,160 L1180,190 L1260,170 L1340,210 L1440,190 L1440,400Z" fill="rgba(180,77,255,.012)"/>
-<path d="M0,400 L0,350 L120,330 L240,345 L360,310 L480,330 L600,290 L720,310 L840,280 L960,300 L1080,270 L1200,295 L1320,275 L1440,300 L1440,400Z" fill="rgba(255,45,85,.01)"/>
-<path d="M0,400 L0,370 L40,368 L50,355 L60,368 L80,370 L110,352 L120,367 L150,370 L190,350 L200,368 L230,370 L270,348 L280,367 L320,370 L360,353 L370,368 L400,370 L450,345 L460,367 L500,370 L550,350 L560,368 L600,370 L650,348 L660,367 L700,370 L750,352 L760,368 L800,370 L850,345 L860,367 L900,370 L950,353 L960,368 L1000,370 L1050,348 L1060,367 L1100,370 L1150,350 L1160,368 L1200,370 L1250,352 L1260,367 L1300,370 L1350,345 L1360,368 L1440,370 L1440,400Z" fill="rgba(0,240,212,.008)"/>
+<!-- mountain silhouettes -->
+<svg style="position:fixed;bottom:0;left:0;width:100%;height:45vh;pointer-events:none;z-index:0;display:block" viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0,400 L0,280 L80,240 L160,260 L240,200 L320,220 L400,160 L440,180 L520,120 L600,150 L680,100 L720,130 L800,80 L880,120 L960,90 L1040,140 L1120,100 L1200,160 L1280,130 L1360,180 L1440,150 L1440,400Z" fill="rgba(0,240,212,.018)"/>
+<path d="M0,400 L0,320 L100,290 L200,310 L300,260 L380,280 L460,230 L540,250 L620,200 L700,230 L780,180 L860,210 L940,170 L1020,200 L1100,160 L1180,190 L1260,170 L1340,210 L1440,190 L1440,400Z" fill="rgba(180,77,255,.015)"/>
+<path d="M0,400 L0,350 L120,330 L240,345 L360,310 L480,330 L600,290 L720,310 L840,280 L960,300 L1080,270 L1200,295 L1320,275 L1440,300 L1440,400Z" fill="rgba(255,45,85,.012)"/>
 </svg>
 
-<div class="hero" id="top">
-<div aria-hidden="true" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0">
-  <svg viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;opacity:.55">
+<!-- aurora borealis — full viewport, behind everything -->
+<div aria-hidden="true" style="position:fixed;top:0;left:0;width:100%;height:70vh;pointer-events:none;z-index:0;overflow:visible">
+  <svg width="100%" height="100%" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <filter id="blur1"><feGaussianBlur stdDeviation="18"/></filter>
-      <filter id="blur2"><feGaussianBlur stdDeviation="28"/></filter>
+      <filter id="af1" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="22 14"/></filter>
+      <filter id="af2" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="32 20"/></filter>
+      <filter id="af3" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="18 10"/></filter>
     </defs>
-    <!-- aurora band 1 — teal/green -->
-    <path d="M-100,120 Q200,80 500,130 Q800,175 1300,110" stroke="none" fill="none"/>
-    <ellipse cx="580" cy="125" rx="700" ry="55" fill="rgba(0,220,170,.45)" filter="url(#blur1)"
-      style="animation:aurora 7s ease-in-out infinite;transform-origin:center"/>
-    <!-- aurora band 2 — purple -->
-    <ellipse cx="450" cy="95" rx="550" ry="38" fill="rgba(130,80,220,.35)" filter="url(#blur2)"
-      style="animation:aurora2 9s ease-in-out infinite;transform-origin:center"/>
-    <!-- aurora band 3 — lime -->
-    <ellipse cx="750" cy="160" rx="500" ry="32" fill="rgba(60,210,100,.3)" filter="url(#blur1)"
-      style="animation:aurora 11s ease-in-out infinite reverse;transform-origin:center"/>
+    <!-- band 1: wide teal sweep -->
+    <ellipse cx="720" cy="180" rx="900" ry="48"
+      fill="rgba(0,210,160,.28)" filter="url(#af1)"
+      style="animation:aurora 8s ease-in-out infinite;transform-origin:720px 180px"/>
+    <!-- band 2: purple/violet above -->
+    <ellipse cx="620" cy="130" rx="750" ry="36"
+      fill="rgba(120,60,220,.22)" filter="url(#af2)"
+      style="animation:aurora2 11s ease-in-out infinite;transform-origin:620px 130px"/>
+    <!-- band 3: lime accent -->
+    <ellipse cx="900" cy="210" rx="650" ry="30"
+      fill="rgba(50,200,90,.18)" filter="url(#af3)"
+      style="animation:aurora 13s ease-in-out infinite reverse;transform-origin:900px 210px"/>
+    <!-- band 4: faint cyan lower -->
+    <ellipse cx="500" cy="260" rx="800" ry="25"
+      fill="rgba(0,180,200,.15)" filter="url(#af1)"
+      style="animation:aurora2 9s ease-in-out infinite reverse;transform-origin:500px 260px"/>
   </svg>
 </div>
+
+<div class="hero" id="top">
 <div class="hero-eyebrow">June 13 - 19, 2026</div>
 <h1 class="hero-title">Alaska.</h1>
 <p class="hero-sub"><a href="https://www.alyeskaresort.com" target="_blank" style="color:var(--dim);text-decoration:underline;text-underline-offset:3px;transition:color .15s" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--dim)'">Alyeska Resort</a>, <a href="https://www.google.com/maps/place/Alyeska+Resort/@60.9604,-149.1079,14z" target="_blank" style="color:var(--dim);text-decoration:underline;text-underline-offset:3px;transition:color .15s" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--dim)'">Girdwood</a> &amp; beyond.</p>
