@@ -423,12 +423,14 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 })();
 
 (function(){
-  var BLOB = 'https://jsonblob.com/api/jsonBlob/019e4c56-dfae-71de-b39c-7015e003f324';
+  var GH_TOKEN = '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';
+  var GH_API   = 'https://api.github.com/repos/andydudds/alaska/contents/notes.json';
+  var RAW_URL  = 'https://raw.githubusercontent.com/andydudds/alaska/main/notes.json';
   var COLORS = ['#fef08a','#bbf7d0','#bfdbfe','#fecaca','#fed7aa'];
   var ROTS = [-2, 1.2, -0.6, 1.8, -1.4];
   var _notes = [];
   var _saving = false;
-  var _pollTimer = null;
+  var _sha = null;
 
   function setStatus(msg, color){
     var el = document.getElementById('notes-status');
@@ -438,31 +440,40 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
   }
 
   function fetchNotes(silent){
-    return fetch(BLOB, {headers:{'Accept':'application/json'}})
+    // Use raw URL for fast reads (no auth needed, CDN-cached)
+    return fetch(RAW_URL + '?t=' + Date.now())
       .then(function(r){ return r.json(); })
       .then(function(data){
         var incoming = (data && Array.isArray(data.notes)) ? data.notes : [];
-        // only re-render if data changed and user isn't actively typing
         var changed = JSON.stringify(incoming) !== JSON.stringify(_notes);
         _notes = incoming;
         if(changed || !silent) render(true);
         if(!silent) setStatus('synced', 'rgba(0,240,212,.5)');
       })
-      .catch(function(){ if(!silent) setStatus('offline — notes may not sync', '#f87171'); });
+      .catch(function(){ if(!silent) setStatus('offline', '#f87171'); });
   }
 
   function pushNotes(){
     if(_saving) return;
     _saving = true;
     setStatus('saving…', 'rgba(255,255,255,.4)');
-    fetch(BLOB, {
-      method:'PUT',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body: JSON.stringify({notes: _notes})
-    })
-    .then(function(){ setStatus('saved ✓', 'rgba(0,240,212,.6)'); })
-    .catch(function(){ setStatus('save failed', '#f87171'); })
-    .finally(function(){ _saving = false; });
+    // Get current SHA first (required by GitHub API for updates)
+    fetch(GH_API, {headers:{'Authorization':'Bearer '+GH_TOKEN,'Accept':'application/vnd.github+json'}})
+      .then(function(r){ return r.json(); })
+      .then(function(meta){
+        var sha = meta.sha;
+        var body = JSON.stringify({notes: _notes});
+        var b64 = btoa(unescape(encodeURIComponent(body)));
+        return fetch(GH_API, {
+          method: 'PUT',
+          headers:{'Authorization':'Bearer '+GH_TOKEN,'Content-Type':'application/json','Accept':'application/vnd.github+json'},
+          body: JSON.stringify({message:'update notes', content: b64, sha: sha})
+        });
+      })
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function(){ setStatus('saved ✓', 'rgba(0,240,212,.6)'); })
+      .catch(function(){ setStatus('save failed', '#f87171'); })
+      .finally(function(){ _saving = false; });
   }
 
   function render(keepFocus){
