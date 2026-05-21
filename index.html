@@ -370,7 +370,7 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 <section id="notes" style="max-width:900px;margin:0 auto;padding:60px 24px 20px;position:relative;z-index:1">
   <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">The Bulletin Board</div>
   <div style="font-size:clamp(26px,5vw,36px);font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--gold),#e8c84b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px">Crew Notes</div>
-  <p style="color:var(--dim);font-size:13px;margin:0 0 28px">Stick a note. Saves in your browser &mdash; only you can see it.</p>
+  <p style="color:var(--dim);font-size:13px;margin:0 0 28px">Shared between all of you. Add a note, everyone sees it. <span id="notes-status" style="color:rgba(255,255,255,.35);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px"></span></p>
   <div id="notes-board" style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;min-height:60px"></div>
   <button onclick="addNote()" style="margin-top:24px;background:var(--gold);color:#111;border:none;border-radius:6px;padding:9px 20px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-weight:700;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">+ Add Note</button>
 </section>
@@ -404,43 +404,102 @@ section{padding:80px 24px 60px;max-width:620px;margin:0 auto;position:relative;z
 })();
 
 (function(){
-  var KEY = 'alaska26_notes';
+  var BLOB = 'https://jsonblob.com/api/jsonBlob/019e4c56-dfae-71de-b39c-7015e003f324';
   var COLORS = ['#fef08a','#bbf7d0','#bfdbfe','#fecaca','#fed7aa'];
   var ROTS = [-2, 1.2, -0.6, 1.8, -1.4];
-  function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||[]; }catch(e){ return []; } }
-  function save(n){ localStorage.setItem(KEY, JSON.stringify(n)); }
-  function render(){
-    var notes = load();
+  var _notes = [];
+  var _saving = false;
+  var _pollTimer = null;
+
+  function setStatus(msg, color){
+    var el = document.getElementById('notes-status');
+    if(!el) return;
+    el.textContent = msg;
+    el.style.color = color || 'rgba(255,255,255,.35)';
+  }
+
+  function fetchNotes(silent){
+    return fetch(BLOB, {headers:{'Accept':'application/json'}})
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        var incoming = (data && Array.isArray(data.notes)) ? data.notes : [];
+        // only re-render if data changed and user isn't actively typing
+        var changed = JSON.stringify(incoming) !== JSON.stringify(_notes);
+        _notes = incoming;
+        if(changed || !silent) render(true);
+        if(!silent) setStatus('synced', 'rgba(0,240,212,.5)');
+      })
+      .catch(function(){ if(!silent) setStatus('offline — notes may not sync', '#f87171'); });
+  }
+
+  function pushNotes(){
+    if(_saving) return;
+    _saving = true;
+    setStatus('saving…', 'rgba(255,255,255,.4)');
+    fetch(BLOB, {
+      method:'PUT',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({notes: _notes})
+    })
+    .then(function(){ setStatus('saved ✓', 'rgba(0,240,212,.6)'); })
+    .catch(function(){ setStatus('save failed', '#f87171'); })
+    .finally(function(){ _saving = false; });
+  }
+
+  function render(keepFocus){
     var board = document.getElementById('notes-board');
     if(!board) return;
+    var focused = document.activeElement;
+    var focusedIdx = -1;
+    var focusedPos = 0;
+    if(focused && focused.tagName === 'TEXTAREA' && focused.closest('#notes-board')){
+      focusedIdx = parseInt(focused.dataset.idx);
+      focusedPos = focused.selectionStart;
+    }
     board.innerHTML = '';
-    notes.forEach(function(text, i){
+    _notes.forEach(function(text, i){
       var c = COLORS[i % COLORS.length];
       var r = ROTS[i % ROTS.length];
       var el = document.createElement('div');
       el.style.cssText = 'background:'+c+';color:#222;border-radius:2px;padding:14px 14px 10px;width:190px;min-height:110px;box-shadow:3px 5px 14px rgba(0,0,0,.45);transform:rotate('+r+'deg);position:relative;transition:transform .15s;flex-shrink:0';
       var ta = document.createElement('textarea');
       ta.value = text;
+      ta.dataset.idx = i;
       ta.style.cssText = 'width:100%;min-height:80px;background:none;border:none;outline:none;resize:none;font-family:Georgia,serif;font-size:13px;color:#222;line-height:1.5;padding:0';
-      ta.setAttribute('placeholder','Write something...');
-      (function(idx){ ta.addEventListener('input', function(){ var n=load(); n[idx]=this.value; save(n); }); })(i);
+      ta.setAttribute('placeholder','Write something…');
+      var debounce;
+      (function(idx){
+        ta.addEventListener('input', function(){
+          _notes[idx] = this.value;
+          clearTimeout(debounce);
+          debounce = setTimeout(pushNotes, 800);
+        });
+      })(i);
       var btn = document.createElement('button');
       btn.textContent = '×';
       btn.style.cssText = 'position:absolute;top:5px;right:8px;background:none;border:none;font-size:16px;cursor:pointer;color:rgba(0,0,0,.35);line-height:1;padding:0';
-      (function(idx){ btn.onclick = function(){ var n=load(); n.splice(idx,1); save(n); render(); }; })(i);
+      (function(idx){ btn.onclick = function(){ _notes.splice(idx,1); render(); pushNotes(); }; })(i);
       el.appendChild(btn);
       el.appendChild(ta);
       el.addEventListener('mouseover', function(){ el.style.transform='rotate(0deg) scale(1.04)'; });
       el.addEventListener('mouseout', function(){ el.style.transform='rotate('+r+'deg)'; });
       board.appendChild(el);
+      if(keepFocus && i === focusedIdx){ ta.focus(); try{ ta.setSelectionRange(focusedPos, focusedPos); }catch(e){} }
     });
   }
+
   window.addNote = function(){
-    var n = load(); n.push(''); save(n); render();
+    _notes.push(''); render();
     var tas = document.querySelectorAll('#notes-board textarea');
     if(tas.length) tas[tas.length-1].focus();
+    pushNotes();
   };
-  render();
+
+  // poll every 12s for updates from other crew members
+  function poll(){ fetchNotes(true); _pollTimer = setTimeout(poll, 12000); }
+
+  fetchNotes(false);
+  setTimeout(poll, 12000);
 })();
 </script>
 </html>
