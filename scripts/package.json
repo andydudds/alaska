@@ -1,0 +1,14 @@
+{
+  "name": "trip-photo-mirror",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Server-side job that mirrors an iCloud shared album into Supabase for the family travel archive.",
+  "scripts": {
+    "mirror": "node mirror.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "heic-convert": "^2.1.0"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "archive": {
+    "title": "Duddleston Expeditions",
+    "tagline": "Where the family goes, and what we shot while we were there."
+  },
+  "trips": [
+    {
+      "slug": "alaska-2026",
+      "title": "Alaska",
+      "subtitle": "Alyeska Resort, Girdwood",
+      "dates": "Jun 13–19, 2026",
+      "start": "2026-06-13",
+      "end": "2026-06-19",
+      "tz": "America/Anchorage",
+      "status": "upcoming",
+      "accent": "#00f0d4",
+      "cover": "alaska-2026/og-image.png",
+      "blurb": "6 nights, 3 Duddlestons, 0 bears. Glaciers, dog sleds, and a Denali flightseeing run.",
+      "icloudToken": "PASTE_YOUR_ICLOUD_ALBUM_TOKEN_HERE",
+      "contributorAliases": {
+        "Ben": "Benji",
+        "Benjamin": "Benji",
+        "Jan": "Jan",
+        "Andy": "Andy",
+        "Andrew": "Andy"
+      }
+    }
+  ]
+}
